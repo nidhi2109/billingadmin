@@ -41,7 +41,7 @@
 <!-- <link href="{{ asset('public/dist/css/style.css') }}" rel="stylesheet" type="text/css"> -->
     <style>
         .wrapper {
-            background: url("public/img/big/img1.jpg") !important;
+            background: url("{{ asset('public/img/big/img1.jpg') }}") !important;
         }
 
         .boxstyle {
@@ -132,11 +132,11 @@
                 <span class="brand-text">aBill</span>
             </a>
         </div>
-        <div class="form-group mb-0 pull-right">
-            <span class="inline-block pr-10"><b>Already have an account?</b></span>
-            <a class="inline-block btn btn-warning btn-rounded btn-outline"
-               href="{{ URL::to('consumer/registeration') }}"><b>Create an Account</b></a>
-        </div>
+        {{--<div class="form-group mb-0 pull-right">--}}
+            {{--<span class="inline-block pr-10"><b>Already have an account?</b></span>--}}
+            {{--<a class="inline-block btn btn-warning btn-rounded btn-outline"--}}
+               {{--href="{{ URL::to('consumer/registeration') }}"><b>Create an Account</b></a>--}}
+        {{--</div>--}}
         <div class="clearfix"></div>
     </header>
     <div class="page-wrapper pa-0 ma-0 auth-page">
@@ -144,9 +144,14 @@
             <div class="table-struct full-width full-height ">
                 <div class="table-cell auth-form-wrap">
 
-                    <div class="auth-form  ml-auto mr-auto no-float boxstyle wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30 ">
+                    <div class="auth-form  ml-auto mr-auto no-float boxstyle wrap-login100 p-l-55 p-r-55 p-t-20 p-b-30 ">
                         <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="text-center">
+                                    <img class="brand-img mr-10" src="http://localhost/billingadmin/public/img/logo.gif" alt="brand" style="height: 70px">
+                                </div>
 
+                            </div>
                             <div class="col-sm-12 col-xs-12">
                                 <div class="mb-30">
                                     <h3 class="text-center txt-dark mb-10">Sign in to aBill</h3>
@@ -156,27 +161,18 @@
                                     @if (Session::has('message'))
                                         {!! session('message') !!}
                                     @endif
-                                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator"
-                                          role="form">
+                                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator" role="form">
                                         @csrf
 
                                         <div class="form-group ">
-                                            <label class="control-label mb-10"
-                                                   for="exampleInputEmail_2">Username</label>
-                                            <input id="username" type="text" class="form-control" name="username"
-                                                   value="" required autofocus placeholder="Enter Username">
-
+                                            <label class="control-label mb-10" for="exampleInputEmail_2">Username</label>
+                                            <input id="username" type="text" class="form-control" name="username" value="" required autofocus placeholder="Enter Username">
 
                                         </div>
 
-                                        <div class="form-group ">
+                                        <div class="form-group">
                                             <label class="pull-left control-label mb-10" for="exampleInputpwd_2">Password</label>
-
-
-                                            <input id="password" type="password" class="form-control" name="password"
-                                                   required placeholder="Enter Password">
-
-
+                                            <input id="password" type="password" class="form-control" name="password" required placeholder="Enter Password">
                                         </div>
 
 

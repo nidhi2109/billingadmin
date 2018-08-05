@@ -12,12 +12,12 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		
 		<!-- vector map CSS -->
-		<link href="{{ asset('vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+		<link href="{{ asset('public/vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
 		
 		
 		
 		<!-- Custom CSS -->
-		<link href="{{ asset('dist/css/style.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('public/dist/css/style.css') }}" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<!--Preloader-->
@@ -71,16 +71,16 @@
 		<!-- JavaScript -->
 		
 		<!-- jQuery -->
-		<script src="{{ asset('vendors/bower_components/jquery/dist/jquery.min.js') }}"></script>
+		<script src="{{ asset('public/vendors/bower_components/jquery/dist/jquery.min.js') }}"></script>
 		
 		<!-- Bootstrap Core JavaScript -->
-		<script src="{{ asset('vendors/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-		<script src="{{ asset('vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script>
+		<script src="{{ asset('public/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('public/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script>
 		
 		<!-- Slimscroll JavaScript -->
-		<script src="{{ asset('dist/js/jquery.slimscroll.js') }}"></script>
+		<script src="{{ asset('public/dist/js/jquery.slimscroll.js') }}"></script>
 		
 		<!-- Init JavaScript -->
-		<script src="{{ asset('dist/js/init.js') }}"></script>
+		<script src="{{ asset('public/dist/js/init.js') }}"></script>
 	</body>
 </html>
