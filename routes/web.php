@@ -17,17 +17,21 @@ Route::any('api', 'SoapController@server');
 /*
 LOGIN LOGOUT ROUTES
 */
-Route::get('login', function()
-{
-   return View::make('login');
+Route::get('login', function() {
+    return View::make('login');
 })->name('login');
+
 Route::post('checklogin','LoginController@checkdata');
 Route::get('logout','LoginController@logoutuser')->name('logout');
 
 /*
 ADMIN ROUTES
 */
-Route::group(['prefix' => 'agent'], function () {
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('login', function() {
+        return View('admin.login');
+    })->name('login');
+
 	Route::get('dashboard','Admin\DashboardController@index')->name('admindashboard');
 	Route::get('agent','Admin\AgentController@index')->name('adminagent');
 	Route::get('role','Admin\RoleController@index')->name('adminrole');
