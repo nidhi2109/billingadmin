@@ -29,7 +29,9 @@ class LoginController extends Controller {
 
 		    return redirect()->route('login');
 		}
-     $result = $client->call("getUserId", array("arg0" => $name));
+
+        $result = $client->call("getUserId", array("arg0" => $name));
+//		return $result;
         if ($client->fault) {
             \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -66,7 +68,8 @@ class LoginController extends Controller {
                   return redirect()->route('login');          
               }else{
                   $actualpassword=$result['return']['password'];
-                
+
+//                  return $result;
                 //if($actualpassword==md5($password)){
                   //set session n redirect
                   $role=$result['return']['role'];
@@ -77,7 +80,7 @@ class LoginController extends Controller {
                     return redirect()->route('consumerdashboard');
                   }else if($role=="Agent") {
                     return redirect()->route('agentdashboard');
-                  }else if($role=="Admin") {
+                  }else if($role=="Super user") {
                     return redirect()->route('admindashboard');
                   }
                 // }else{
@@ -134,7 +137,6 @@ class LoginController extends Controller {
         return redirect()->route('login');
    }
     public function logoutuser(Request $request){
-
       $request->session()->flush();
       return redirect()->route('login');
     }

@@ -46,6 +46,9 @@ Route::group(['prefix' => 'admin'], function () {
 AGENT ROUTES
 */
 Route::group(['prefix' => 'agent'], function (){
+    Route::get('login', function() {
+        return View('agent.login');
+    })->name('login');
 	Route::get('dashboard','Agent\DashboardController@index')->name('agentdashboard');
 	Route::get('location','Agent\LocationController@index')->name('agentlocation');
 	Route::get('account','Agent\AccountController@index')->name('agentaccount');

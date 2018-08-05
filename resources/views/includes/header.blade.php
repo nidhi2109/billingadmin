@@ -320,10 +320,10 @@
             <span>Main</span>
             <i class="zmdi zmdi-more"></i>
         </li>
-        @if($role == "Admin")
+        @if($role == "Super user")
             <li>
                 <a class="active" href="{{ URL::to('admin/dashboard') }}">
-                    <div class="pull-left"><i class="icon-layers mr-20"></i><span class="right-nav-text">Dashboard</span>
+                    <div class="pull-left"><i class="icon-home mr-20"></i><span class="right-nav-text">Dashboard</span>
                     </div>
                     <div class="pull-right"></div>
                     <div class="clearfix"></div>
@@ -339,6 +339,68 @@
                 </a>
             </li>
             <li>
+                <a class="active" href="{{ URL::to('admin/invoice') }}">
+                    <div class="pull-left"><i class="fa fa-file-text-o mr-20"></i>
+                        <span class="right-nav-text">Invoice</span></div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            <li>
+                <a class="active" href="{{ URL::to('admin/payment') }}">
+                    <div class="pull-left"><i class="pe-7s-cash mr-20"></i>
+                        <span class="right-nav-text">Payment</span></div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            <li>
+                <a class="active" href="{{ URL::to('admin/order') }}">
+                    <div class="pull-left"><i class="pe-7s-portfolio mr-20"></i>
+                        <span class="right-nav-text">Order</span></div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            <li>
+                <a class="active" href="{{ URL::to('admin/subscription') }}">
+                    <div class="pull-left"><i class="fa fa-flag mr-20"></i>
+                        <span class="right-nav-text">Subscription</span></div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            <li>
+                <a class="active" href="{{ URL::to('admin/product') }}">
+                    <div class="pull-left"><i class="fa fa-product-hunt mr-20"></i>
+                        <span class="right-nav-text">Product</span></div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            <li>
+                <a class="active" href="{{ URL::to('admin/report') }}">
+                    <div class="pull-left"><i class="pe-7s-note2 mr-20"></i>
+                        <span class="right-nav-text">Report</span></div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            <li>
+                <a class="active" href="{{ URL::to('admin/configration') }}">
+                    <div class="pull-left"><i class="icon-settings mr-20"></i>
+                        <span class="right-nav-text">Configration</span></div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+            <li>
                 <a class="active" href="{{ URL::to('admin/adminrole') }}">
                     <div class="pull-left"><i class="pe-7s-server mr-20"></i>
                         <span class="right-nav-text">Roles Management</span>
@@ -346,7 +408,6 @@
                     <div class="pull-right"></div>
                     <div class="clearfix"></div>
                 </a>
-
             </li>
             <li>
                 <a class="active" href="">

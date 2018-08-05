@@ -9,13 +9,14 @@
 	<!-- Breadcrumb -->
 	<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 	  <ol class="breadcrumb">
-		<li><a href="/consumer/dashboard">Dashboard</a></li>
+		<li><a href="{{ URL::to('admin/dashboard') }}">Dashboard</a></li>
 		<li><a href="#"><span>My Account</span></a></li>
 		
 	  </ol>
 	</div>
 	<!-- /Breadcrumb -->
 </div>
+
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-default card-view">
