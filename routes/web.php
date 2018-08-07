@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin'], function () {
     })->name('login');
 
 	Route::get('dashboard','Admin\DashboardController@index')->name('admindashboard');
+    Route::get('account','Admin\AccountController@index')->name('adminAccount');
 	Route::get('agent','Admin\AgentController@index')->name('adminagent');
 	Route::get('role','Admin\RoleController@index')->name('adminrole');
 	Route::get('product','Admin\ProductController@index')->name('adminproduct');

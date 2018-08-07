@@ -5352,7 +5352,7 @@ a.compose-mail {
 .irs-bar,
 .irs-bar-edge,
 .irs-slider {
-  background: url("../../../img/range/sprite-skin-modern.png"); }
+  background: url("../../../public/img/range/sprite-skin-modern.png"); }
 
 .irs-slider {
   background-position: 0 -120px; }
@@ -6240,7 +6240,7 @@ a.compose-mail {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   overflow: hidden;
-  background-image: url("../../../img/gallery/mock6.jpg"); }
+  background-image: url("../../../public/img/gallery/mock6.jpg"); }
   .profile-box .profile-cover-pic .profile-image-overlay {
     position: absolute;
     height: 100%;

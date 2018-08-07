@@ -89,7 +89,7 @@
                         <ul class="pa-20">
                             <li class="col-md-3 col-xs-6 col-menu-list">
                                 <a href="javascript:void(0);">
-                                    <div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span
+                                    <div class="pull-left"><i class="ti-desktop mr-20"></i><span
                                                 class="right-nav-text">Dashboard</span></div>
                                     <div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div>
                                     <div class="clearfix"></div>
@@ -298,6 +298,10 @@
                 <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
 
                     <li>
+                        <a href="{{ URL::to('admin/account') }}"><i class="zmdi zmdi-account"></i><span>My Account</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
                         <a class="dropdown-item" href="{{ URL::to('logout') }}">
                             <i class="zmdi zmdi-power"></i><span>{{ __('Logout') }}</span>
                         </a>
@@ -323,7 +327,7 @@
         @if($role == "Super user")
             <li>
                 <a class="active" href="{{ URL::to('admin/dashboard') }}">
-                    <div class="pull-left"><i class="icon-home mr-20"></i><span class="right-nav-text">Dashboard</span>
+                    <div class="pull-left"><i class="ti-desktop mr-20"></i><span class="right-nav-text">Dashboard</span>
                     </div>
                     <div class="pull-right"></div>
                     <div class="clearfix"></div>
@@ -375,6 +379,25 @@
             </li>
 
             <li>
+                <a class="active" href="{{ URL::to('admin/billing') }}">
+                    <div class="pull-left"><i class="pe-7s-news-paper mr-20"></i><span class="right-nav-text">Billing Information</span>
+                    </div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            <li>
+                <a class="active" href="{{ URL::to('admin/mediation') }}">
+                    <div class="pull-left"><i class="ti-wheelchair mr-20"></i><span class="right-nav-text">Mediation</span>
+                    </div>
+                    <div class="pull-right"></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+
+            <li>
                 <a class="active" href="{{ URL::to('admin/product') }}">
                     <div class="pull-left"><i class="fa fa-product-hunt mr-20"></i>
                         <span class="right-nav-text">Product</span></div>
@@ -393,9 +416,9 @@
             </li>
 
             <li>
-                <a class="active" href="{{ URL::to('admin/configration') }}">
+                <a class="active" href="{{ URL::to('admin/configuration') }}">
                     <div class="pull-left"><i class="icon-settings mr-20"></i>
-                        <span class="right-nav-text">Configration</span></div>
+                        <span class="right-nav-text">Configuration</span></div>
                     <div class="pull-right"></div>
                     <div class="clearfix"></div>
                 </a>
@@ -469,7 +492,7 @@
 
         @elseif($role == "Agent")
             <li>
-                <a class="active" href="/location">
+                <a class="active" href="{{ URL::to('location') }}">
                     <div class="pull-left"><i class="pe-7s-user mr-20"></i><span
                                 class="right-nav-text">Assigned Location</span></div>
                     <div class="pull-right"></div>
