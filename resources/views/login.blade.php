@@ -144,9 +144,14 @@
             <div class="table-struct full-width full-height ">
                 <div class="table-cell auth-form-wrap">
 
-                    <div class="auth-form  ml-auto mr-auto no-float boxstyle wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30 ">
+                    <div class="auth-form  ml-auto mr-auto no-float boxstyle wrap-login100 p-l-55 p-r-55 p-t-20 p-b-30 ">
                         <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="text-center">
+                                    <img class="brand-img mr-10" src="http://localhost/billingadmin/public/img/logo.gif" alt="brand" style="height: 70px">
+                                </div>
 
+                            </div>
                             <div class="col-sm-12 col-xs-12">
                                 <div class="mb-30">
                                     <h3 class="text-center txt-dark mb-10">Sign in to aBill</h3>
@@ -156,27 +161,18 @@
                                     @if (Session::has('message'))
                                         {!! session('message') !!}
                                     @endif
-                                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator"
-                                          role="form">
+                                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator" role="form">
                                         @csrf
 
                                         <div class="form-group ">
-                                            <label class="control-label mb-10"
-                                                   for="exampleInputEmail_2">Username</label>
-                                            <input id="username" type="text" class="form-control" name="username"
-                                                   value="" required autofocus placeholder="Enter Username">
-
+                                            <label class="control-label mb-10" for="exampleInputEmail_2">Username</label>
+                                            <input id="username" type="text" class="form-control" name="username" value="" required autofocus placeholder="Enter Username">
 
                                         </div>
 
-                                        <div class="form-group ">
+                                        <div class="form-group">
                                             <label class="pull-left control-label mb-10" for="exampleInputpwd_2">Password</label>
-
-
-                                            <input id="password" type="password" class="form-control" name="password"
-                                                   required placeholder="Enter Password">
-
-
+                                            <input id="password" type="password" class="form-control" name="password" required placeholder="Enter Password">
                                         </div>
 
 

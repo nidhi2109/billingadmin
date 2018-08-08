@@ -44,20 +44,20 @@
 											<h6 class="block capitalize-font pb-20">{{ $account['companyName'] }}</h6>
 										</div>
 										<div class="social-info">
-											<div class="row">
-												<div class="col-xs-4 text-center">
-													<span class="counts block head-font"><span class="counter-anim">Email</span></span>
-													<span class="counts-text block">post</span>
-												</div>
-												<div class="col-xs-4 text-center">
-													<span class="counts block head-font"><span class="counter-anim">246</span></span>
-													<span class="counts-text block">followers</span>
-												</div>
-												<div class="col-xs-4 text-center">
-													<span class="counts block head-font"><span class="counter-anim">898</span></span>
-													<span class="counts-text block">tweets</span>
-												</div>
-											</div>
+											{{--<div class="row">--}}
+												{{--<div class="col-xs-4 text-center">--}}
+													{{--<span class="counts block head-font"><span class="counter-anim">Email</span></span>--}}
+													{{--<span class="counts-text block">post</span>--}}
+												{{--</div>--}}
+												{{--<div class="col-xs-4 text-center">--}}
+													{{--<span class="counts block head-font"><span class="counter-anim">246</span></span>--}}
+													{{--<span class="counts-text block">followers</span>--}}
+												{{--</div>--}}
+												{{--<div class="col-xs-4 text-center">--}}
+													{{--<span class="counts block head-font"><span class="counter-anim">898</span></span>--}}
+													{{--<span class="counts-text block">tweets</span>--}}
+												{{--</div>--}}
+											{{--</div>--}}
 											<button class="btn btn-warning btn-block btn-anim mt-30" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i><span class="btn-text">Edit Password</span></button>
 											<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
@@ -128,7 +128,8 @@
 						</div>
 					</div>
                     <div class="col-lg-6">
-                        <form action="#" method="post">
+                        <form action="{{ route('accountUpdate') }}" method="post">
+                            @csrf
                             <div class="form-wrap">
                                 <div class="col-lg-6">
                                     <div class="form-group">
