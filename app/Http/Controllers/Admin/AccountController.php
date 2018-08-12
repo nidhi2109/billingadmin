@@ -12,18 +12,6 @@ class AccountController extends Controller {
     public function __construct(){
         $this->client = new \nusoap_client("http://67.205.185.159:8080/abill/services/apiTwo?wsdl", "true");
         $this->client->setCredentials("billingadmin;20","123qwe","basic");
-        $error = $this->client->getError();
-        if ($error) {
-            \Session::flash('message', '<div class="alert alert-success alert-dismissable">
-                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                 <i class="></i><p class="pull-left">'.$error.'</p>
-                                 <div class="clearfix"></div>
-                              </div>');
-
-            dd($error);
-//            return redirect()->route('admindashboard');
-        }
-
     }
 
     public function index(Request $request){
@@ -207,7 +195,17 @@ class AccountController extends Controller {
 	}
 
 	public function updateData(Request $request){
+        return $request;
+        $error = $this->client->getError();
+        if ($error) {
+            \Session::flash('message', '<div class="alert alert-success alert-dismissable">
+                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                 <i class="></i><p class="pull-left">'.$error.'</p>
+                                 <div class="clearfix"></div>
+                              </div>');
 
+            return redirect()->route('admin.account');
+        }
     }
 	 
 }

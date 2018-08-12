@@ -30,6 +30,7 @@ class LoginController extends Controller {
 		    return redirect()->route('login');
 		}
 
+
         $result = $client->call("getUserId", array("arg0" => $name));
 //		return $result;
         if ($client->fault) {

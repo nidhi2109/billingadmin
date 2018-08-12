@@ -10,7 +10,6 @@
             <ol class="breadcrumb">
                 <li><a href="{{ URL::to('admin/dashboard') }}">Dashboard</a></li>
                 <li><a href="#"><span>Order</span></a></li>
-
             </ol>
         </div>
         <!-- /Breadcrumb -->

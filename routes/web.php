@@ -28,12 +28,10 @@ Route::get('logout','LoginController@logoutuser')->name('logout');
 ADMIN ROUTES
 */
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('login', function() {
-        return View('admin.login');
-    })->name('login');
 
 	Route::get('dashboard','Admin\DashboardController@index')->name('admindashboard');
     Route::get('account','Admin\AccountController@index')->name('adminAccount');
+    Route::post('accountUpdate','Admin\AccountController@updateData')->name('accountUpdate');
 	Route::get('agent','Admin\AgentController@index')->name('adminagent');
 	Route::get('role','Admin\RoleController@index')->name('adminrole');
 	Route::get('product','Admin\ProductController@index')->name('adminproduct');
@@ -47,9 +45,6 @@ Route::group(['prefix' => 'admin'], function () {
 AGENT ROUTES
 */
 Route::group(['prefix' => 'agent'], function (){
-    Route::get('login', function() {
-        return View('agent.login');
-    })->name('login');
 	Route::get('dashboard','Agent\DashboardController@index')->name('agentdashboard');
 	Route::get('location','Agent\LocationController@index')->name('agentlocation');
 	Route::get('account','Agent\AccountController@index')->name('agentaccount');

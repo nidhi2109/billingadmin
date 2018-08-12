@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9e0747e5-cb6a-4342-8205-8e437ff2d80b" name="abill_new" url="http://67.205.185.159/var/www/html/abill_new">
+        <fileTransfer host="67.205.185.159" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="96eb00aa-e459-4ace-9a0b-2a0bf60ce0e1" name="abill_user" url="http://67.205.185.159">
+        <fileTransfer host="67.205.185.159" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

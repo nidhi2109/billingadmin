@@ -1,3 +1,4 @@
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('public/img/favicon.ico') }}">
-    <link rel="icon" href="{{ asset('public/img/favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('public/img/favicon.ico') }}" type="image/x-icon"/>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -29,7 +30,7 @@
           rel="stylesheet" type="text/css"/>
     <!-- Custom CSS -->
     <link href="{{ asset('public/dist/css/style.css') }}" rel="stylesheet" type="text/css">
-    <!-- Data table CSS -->l
+    <!-- Data table CSS -->
     <link href="{{ asset('public/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css') }}"
           rel="stylesheet" type="text/css"/>
 
@@ -37,12 +38,7 @@
     <link href="{{ asset('public/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css') }}"
           rel="stylesheet" type="text/css">
 
-    <!-- Custom CSS -->
-<!-- <link href="{{ asset('public/dist/css/style.css') }}" rel="stylesheet" type="text/css"> -->
     <style>
-        .wrapper {
-            background: url("public/img/big/img1.jpg") !important;
-        }
 
         .boxstyle {
             background: white;
@@ -53,9 +49,7 @@
             box-sizing: border-box;
         }
 
-        body {
-            background: #F6F2F2;
-        }
+
 
         .page-wrapper {
             background: #ECE9E6 !important; /* fallback for old browsers */
@@ -84,10 +78,10 @@
             /*background-image: url('');*/
         }
 
-        .container-login100 img {
-            opacity: 0.5;
+        /*.container-login100 img {*/
+        /*opacity: 0.5;*/
 
-        }
+        /*}*/
 
         .wrap-login100 {
             width: 390px;
@@ -124,10 +118,11 @@
 
     </style>
 </head>
-<div class="wrapper box-layout pa-0" style="background-color:#FF5733; background: url('public/img/big/img1.jpg')">
+<body>
+    <div class="wrapper box-layout pa-0">
     <header class="sp-header">
         <div class="sp-logo-wrap pull-left">
-            <a href="index.html">
+            <a href="{{ URL::to('/login') }}">
                 <img class="brand-img mr-10" src="{{ asset('public/img/logo.gif') }}" alt="brand" style="height: 22px"/>
                 <span class="brand-text">aBill</span>
             </a>
@@ -144,11 +139,12 @@
             <div class="table-struct full-width full-height ">
                 <div class="table-cell auth-form-wrap">
 
-                    <div class="auth-form  ml-auto mr-auto no-float boxstyle wrap-login100 p-l-55 p-r-55 p-t-20 p-b-30 ">
+                    <div class="auth-form ml-auto mr-auto no-float boxstyle wrap-login100 p-l-55 p-r-55 p-t-20 p-b-30 ">
                         <div class="row">
                             <div class="col-sm-12 col-xs-12">
                                 <div class="text-center">
-                                    <img class="brand-img mr-10" src="http://localhost/billingadmin/public/img/logo.gif" alt="brand" style="height: 70px">
+                                    <img class="brand-img mr-10" src="{{ asset('public/img/logo.gif') }}"
+                                         alt="brand" style="height: 55px">
                                 </div>
 
                             </div>
@@ -161,26 +157,40 @@
                                     @if (Session::has('message'))
                                         {!! session('message') !!}
                                     @endif
-                                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator" role="form">
+                                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator"
+                                          role="form">
                                         @csrf
 
                                         <div class="form-group ">
-                                            <label class="control-label mb-10" for="exampleInputEmail_2">Username</label>
-                                            <input id="username" type="text" class="form-control" name="username" value="" required autofocus placeholder="Enter Username">
+                                            <label class="control-label mb-10"
+                                                   for="exampleInputEmail_2">Username</label>
+                                            <input id="username" type="text" class="form-control" name="username"
+                                                   value="" required autofocus placeholder="Enter Username">
 
                                         </div>
 
                                         <div class="form-group">
                                             <label class="pull-left control-label mb-10" for="exampleInputpwd_2">Password</label>
-                                            <input id="password" type="password" class="form-control" name="password" required placeholder="Enter Password">
+                                            <input id="password" type="password" class="form-control" name="password"
+                                                   required placeholder="Enter Password">
                                         </div>
 
 
                                         <div class="form-group text-center row mb-0">
                                             <div class="col-md-12 ">
-                                                <button type="submit" class="btn btn-warning  btn-rounded">
-                                                    {{ __('Login') }}
+                                                {{--<button class="btn btn-info btn-rounded btn-block btn-anim">--}}
+                                                {{--<i class="fa fa-pencil"></i>--}}
+                                                {{--<span class="btn-text">rounded block btn</span>--}}
+                                                {{--</button>--}}
+
+                                                <button type="submit" class="btn btn-warning btn-block btn-anim">
+                                                    <i class="fa fa-lock"></i>
+                                                    <span class="btn-text">{{ __('Login') }}</span>
                                                 </button>
+                                                <p>Or</p>
+                                                <p>New to aBill? <a href="{{ URL::to('consumer/registeration') }}"><b>Create
+                                                            an Account</b></a></p>
+
                                             <!-- <button type="button" class="btn btn-default  btn-rounded">
                                                     {{ __('Cancel') }}
                                                     </button> -->
@@ -210,7 +220,6 @@
 <!-- Slimscroll JavaScript -->
 <script src="{{ asset('public/vendors/bower_components/bootstrap-validator/dist/validator.min.js') }}"></script>
 
-<script src="{{ asset('public/dist/js/jquery.slimscroll.js') }}"></script>
 
 <!-- Init JavaScript -->
 <script src="{{ asset('public/dist/js/init.js') }}"></script>
