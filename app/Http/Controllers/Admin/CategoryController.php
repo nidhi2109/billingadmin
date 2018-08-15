@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Response;
 
 class CategoryController extends Controller
 {
@@ -43,11 +44,11 @@ class CategoryController extends Controller
     {
         $item = $request->except('_token');
         $result = $this->client->call("createItemCategory",array('arg0'=>$item));
-        if(isset($result)){
+        if(isset($result) && !isset($result['faultstring'])){
             return redirect()->route('category.index')->with("msg","record inserted successfully.");
 
         }else{
-            return redirect()->route('category.index')->with("msg","record not inserted.");
+            return redirect()->route('category.index')->with("errorMsg",$result['faultstring']);
         }
     }
 
@@ -59,18 +60,28 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        //
+        return view('admin.category.edit');
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        $item = $request->except('_token');
+        $item['id'] = $id;
+        $result = $this->client->call("updateItemCategory",array('arg0'=>$item));
+
+        if(isset($result) && !isset($result['faultstring'])){
+            return redirect()->route('category.index')->with("msg","record updated successfully.");
+
+        }else{
+            return redirect()->route('category.index')->with("errorMsg",$result['faultstring']);
+        }
     }
 
 
     public function destroy($id)
     {
+//        return gettype((int)$id);
         $result = $this->client->call("deleteItemCategory",array('arg0'=>(int)$id));
 
         if(isset($result) && !isset($result['faultstring'])){
@@ -80,5 +91,26 @@ class CategoryController extends Controller
         }
 
 
+    }
+
+    public function downloadCSV(){
+        $result = $this->client->call("getAllItemCategories");
+        $categories = $result['return'];
+//        return $categories;
+
+        $filename = "category.csv";
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('id', 'description', 'orderLineTypeId'));
+
+        foreach($categories as $row) {
+            fputcsv($handle, array($row['id'], $row['description'], $row['orderLineTypeId']));
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+        return  Response::download($filename, 'category.csv', $headers);
     }
 }

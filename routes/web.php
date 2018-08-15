@@ -27,14 +27,16 @@ Route::get('logout','LoginController@logoutuser')->name('logout');
 /*
 ADMIN ROUTES
 */
-Route::group(['prefix' => 'admin'], function () {
-
+Route::group(['prefix' => 'admin','middleware' => ['LoginAuth']], function () {
 	Route::get('dashboard','Admin\DashboardController@index')->name('admindashboard');
+    Route::resource('category','Admin\CategoryController');
+    Route::get('downloadCSV','Admin\CategoryController@downloadCSV')->name('category.downloadCSV');
+    Route::resource('product','Admin\ProductController');
     Route::get('account','Admin\AccountController@index')->name('adminAccount');
     Route::post('accountUpdate','Admin\AccountController@updateData')->name('accountUpdate');
 	Route::get('agent','Admin\AgentController@index')->name('adminagent');
 	Route::get('role','Admin\RoleController@index')->name('adminrole');
-	Route::get('product','Admin\ProductController@index')->name('adminproduct');
+//	Route::get('product','Admin\ProductController@index')->name('adminproduct');
 	Route::get('order','Admin\OrderController@index')->name('adminorder');
 	Route::get('payment','Admin\PaymentController@index')->name('adminpayment');
 	Route::get('invoice','Admin\InvoiceController@index')->name('admininvoice');
@@ -44,7 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
 /*
 AGENT ROUTES
 */
-Route::group(['prefix' => 'agent'], function (){
+Route::group(['prefix' => 'agent','middleware' => ['LoginAuth']], function (){
 	Route::get('dashboard','Agent\DashboardController@index')->name('agentdashboard');
 	Route::get('location','Agent\LocationController@index')->name('agentlocation');
 	Route::get('account','Agent\AccountController@index')->name('agentaccount');
@@ -56,7 +58,7 @@ Route::group(['prefix' => 'agent'], function (){
 /*
 CONSUMER ROUTES
 */
-Route::group(['prefix' => 'consumer'], function () {
+Route::group(['prefix' => 'consumer','middleware' => ['LoginAuth']], function () {
 	Route::get('dashboard','Consumer\DashboardController@index')->name('consumerdashboard');
 	Route::get('account','Consumer\AccountController@index')->name('consumeraccount');
 	Route::get('billing','Consumer\BillingController@index')->name('consumerbilling');

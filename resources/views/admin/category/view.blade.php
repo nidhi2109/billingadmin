@@ -31,13 +31,13 @@
             @endif
 
             @if(Session::has('errorMsg'))
-                    <div class="alert alert-danger alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">{{ Session::get('errorMsg') }}</p>
-                        <div class="clearfix"></div>
-                    </div>
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="zmdi zmdi-block pr-15 pull-left"></i>
+                    <p class="pull-left">{{ Session::get('errorMsg') }}</p>
+                    <div class="clearfix"></div>
+                </div>
             @endif
-
 
 
             <div class="panel panel-default card-view">
@@ -47,6 +47,9 @@
                     </div>
                     <div class="col-md-6 text-right">
                         <a class="btn btn-info" href="{{ route("category.create") }}">Add New Category</a>
+                        <a href="{{ route("category.downloadCSV") }}" class="btn btn-default btn-anim"><i class="fa fa-download"></i><span class="btn-text">Download CSV</span></a>
+
+                        {{--<a class="btn btn-primary" href="{{ route("category.downloadCSV") }}">Download CSV</a>--}}
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -59,37 +62,47 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Description</th>
-                                        <th>Order Line TypeId</th>
+                                        <th>Type</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @forelse($categories as $category)
                                         <tr>
-                                        <td>{{ $category['id'] }}</td>
-                                        <td>{{ $category['description'] }}</td>
-                                        <td>{{ $category['orderLineTypeId'] }}</td>
-                                        <td>
-                                            <form method="post" action="{{ route('category.destroy',$category['id']) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <a href="#" class="btn  btn-primary"> <i class="fa fa-pencil"></i> </a>
-                                                <button type="submit" class="btn btn-danger"> <i class="fa fa-trash "></i> </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                            <td>{{ $category['id'] }}</td>
+                                            <td>{{ $category['description'] }}</td>
+
+                                            <td>@if($category['orderLineTypeId']==1)Items
+                                                @elseif($category['orderLineTypeId']==2)Tax
+                                                @elseif($category['orderLineTypeId']==3)Penalty
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <form method="post"
+                                                      action="{{ route('category.destroy',$category['id']) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <a href="{{ route('category.edit',$category['id']) }}"
+                                                       class="btn  btn-primary"> <i class="fa fa-pencil"></i> </a>
+                                                    <button type="submit" class="btn btn-danger"><i
+                                                                class="fa fa-trash "></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     @empty
-                                        <tr><td colspan="4"> Record not found.</td></tr>
+                                        <tr>
+                                            <td colspan="4"> Record not found.</td>
+                                        </tr>
                                     @endforelse
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 @stop

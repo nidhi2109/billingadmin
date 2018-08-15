@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-6 text-right">
                         <a class="btn btn-primary" href="#">Add New Product</a>
-                        <a class="btn btn-info" href="#">Add New Category</a>
+                        <a class="btn btn-info" href="{{ route("category.create") }}">Add New Category</a>
                     </div>
 
                     <div class="clearfix"></div>
