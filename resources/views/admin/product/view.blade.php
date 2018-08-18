@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-@section('content')
+@section('Breadcrumb')
 
-    <div class="row heading-bg">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
             <h5 class="txt-dark">Product</h5>
         </div>
@@ -15,7 +14,9 @@
             </ol>
         </div>
         <!-- /Breadcrumb -->
-    </div>
+@endsection
+
+@section('content')
 
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -25,9 +26,9 @@
                         <h6 class="panel-title txt-dark">Manage Product</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-primary" href="{{ route("product.create") }}">Add New Product</a>
-                        <a class="btn btn-info" href="{{ route("category.create") }}">Add New Category</a>
-                        <a href="{{ route("category.downloadCSV") }}" class="btn btn-default btn-anim"><i class="fa fa-download"></i><span class="btn-text">Download CSV</span></a>
+                        <a class="btn btn-primary btn-sm" href="{{ route("product.create") }}">Add New Product</a>
+                        <a class="btn btn-info btn-sm" href="{{ route("category.create") }}">Add New Category</a>
+                        <a href="{{ route("category.downloadCSV") }}" class="btn btn-default btn-anim btn-sm"><i class="fa fa-download"></i><span class="btn-text">Download CSV</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -48,7 +49,7 @@
                                     </thead>
                                     <tbody>
                                     @forelse($products as $product)
-                                        {{--@if(!$product['deleted'])--}}
+                                        @if(!$product['deleted'])
                                                 <tr>
                                                     <td>{{ $product['id'] }}</td>
                                                     <td>{{ $product['number'] }}</td>
@@ -59,18 +60,19 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <form method="post"
-                                                              action="{{ route('product.destroy',$product['id']) }}">
+                                                        <form method="post" action="{{ route('product.destroy',$product['id']) }}">
                                                             @csrf
                                                             @method('delete')
-                                                            <a href="{{ route('product.edit',$product['id']) }}"
-                                                               class="btn  btn-primary"> <i class="fa fa-pencil"></i> </a>
-                                                            <button type="submit" class="btn btn-danger"><i
-                                                                        class="fa fa-trash "></i></button>
+                                                            <a href="{{ route('product.edit',$product['id']) }}" class="text-inverse pr-10 " title="" data-toggle="tooltip" data-original-title="Edit" aria-describedby="tooltip455971">
+                                                                <i class="zmdi zmdi-edit txt-warning font-20"></i>
+                                                            </a>
+                                                            <button type="submit" class="btn-link text-inverse" title="" data-toggle="tooltip" data-original-title="Delete" aria-describedby="tooltip455971">
+                                                                <i class="zmdi zmdi-delete txt-danger font-20"></i>
+                                                            </button>
                                                         </form>
                                                     </td>
                                                 </tr>
-                                        {{--@endif--}}
+                                        @endif
                                     @empty
                                         <tr>
                                             <td colspan="4"> Record not found.</td>

@@ -26,6 +26,7 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('public/css/material-design-iconic-font.min.css') }}" />
 
     <!-- Spread Stylesheet (Login Stylesheet) -->
+    {{--<link href="{{ asset('public/dist/css/style.css') }}" rel="stylesheet" type="text/css">--}}
     <link type="text/css" rel="stylesheet" href="{{ asset('public/css/login_styles.css') }}" />
 
 
@@ -45,25 +46,8 @@
                 <div class="col-md-10 col-md-offset-1">
                     <img src="{{ asset('public/images/login-logo.png') }}" class="login-logo" alt="" />
                     <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator" role="form" id="formValidate">
-                    @if (Session::has('message'))
-                        {!! session('message') !!}
-                    @endif
+                        @include('layouts.notifications')
                     @csrf
-                    <!--  <ul class="list-unstyled form-style">
-                                <li>
-
-                                    <i class="zmdi zmdi-account user-pass"></i>
-                                    <input type="text" id="username" name="username" class="form-control login-form-control" placeholder="Enter Username" required autofocus/>
-                                </li>
-                                <li>
-                                    <i class="zmdi zmdi-lock user-pass"></i>
-                                    <input type="password" name="password" class="form-control login-form-control" placeholder="Enter Password" required minlength=9/>
-                                </li>
-                                <li style="border-bottom:none; margin-top:90px; ">
-                                    <button class="btn btn-primary login-btn">Login <i class="zmdi zmdi-arrow-right"></i></button>
-                                    <a href="#" class="pull-right forgot-password">Forgot Password?</a>
-                                </li>
-                            </ul> -->
                         <ul class="list-unstyled form-style">
                             <li>
 
@@ -88,7 +72,8 @@
                                 </div>
 
                             </li>
-                            <li style="border-bottom:none; margin-top:90px; ">
+
+                            <li style="border-bottom:none;" class="m-20">
                                 <button class="btn btn-primary login-btn" type="submit">Login <i class="zmdi zmdi-arrow-right" ></i></button>
                                 <a href="#" class="pull-right forgot-password">Forgot Password?</a>
                             </li>

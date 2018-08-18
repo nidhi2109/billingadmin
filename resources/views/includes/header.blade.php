@@ -335,9 +335,9 @@
 
             </li>
             <li>
-                <a class="active" href="{{ URL::to('admin/createagent') }}">
+                <a class="active" href="{{ URL::to('admin/agent') }}">
                     <div class="pull-left"><i class="pe-7s-add-user mr-20"></i><span
-                                class="right-nav-text">Create Agent</span></div>
+                                class="right-nav-text">Agent</span></div>
                     <div class="pull-right"></div>
                     <div class="clearfix"></div>
                 </a>

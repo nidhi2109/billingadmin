@@ -25,25 +25,29 @@ class ProductController extends Controller
             $result = $this->client->call("getAllItems");
 
             if (isset($result['faultstring'])) {
-                \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                               <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">' . $result['faultstring'] . '.</p>
-                               <div class="clearfix"></div>
-                            </div>');
-
-                return redirect()->route('admindashboard');
+                return redirect()->route('adminDashboard')->withError($result['faultstring']);
             }
+
             $products = $result['return'];
 //        return $products;
             return view('admin.product.view', ['products' => Utility::customPagination($products, $request->url())]);
         } catch (Exception $e) {
-            return redirect()->route('admindashboard')->with("errorMsg", $e->getMessage());
+            return redirect()->route('adminDashboard')->withError($e->getMessage());
         }
     }
 
     public function create()
     {
-        return view('admin.product.create');
+        try {
+            $result = $this->client->call("getAllItemCategories");
+            if (isset($result['faultstring'])) {
+                return redirect()->route('product.index')->withError($result['faultstring']);
+            }
+            $categories = $result['return'];
+            return view('admin.product.create',compact('categories'));
+        }catch (Exception $e){
+            return redirect()->route('product.index')->withError($e->getMessage());
+        }
     }
 
 
@@ -54,15 +58,13 @@ class ProductController extends Controller
             $result = $this->client->call("createItemCategory", array('arg0' => $item));
             if (isset($result) && !isset($result['faultstring'])) {
                 return redirect()->route('product.index')->with("msg", "record inserted successfully.");
-
             } else {
-                return redirect()->route('product.index')->with("errorMsg", $result['faultstring']);
+                return redirect()->route('product.index')->withError($result['faultstring']);
             }
         } catch (Exception $e) {
-            return redirect()->route('admindashboard')->with("errorMsg", $e->getMessage());
+            return redirect()->route('product.index')->withError($e->getMessage());
         }
     }
-
 
     public function show($id)
     {
@@ -71,35 +73,59 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        return view('admin.category.edit');
+        $result = $this->client->call("getAllItemCategories");
+        $products = $this->client->call("getAllItems");
+        if (isset($result['faultstring'])) {
+            return redirect()->route('product.index')->withError($result['faultstring']);
+        }
+        $categories = $result['return'];
+
+        $product = [];
+        foreach ($products['return'] as $product){
+            if($product['id'] == $id){
+                $product = $product;
+                break;
+            }
+        }
+        return view('admin.product.edit',compact('categories','product'));
     }
 
 
     public function update(Request $request, $id)
     {
-        $item = $request->except('_token');
-        $item['id'] = $id;
-        $result = $this->client->call("updateItemCategory", array('arg0' => $item));
-
-        if (isset($result) && !isset($result['faultstring'])) {
-            return redirect()->route('product.index')->with("msg", "record updated successfully.");
-
-        } else {
-            return redirect()->route('product.index')->with("errorMsg", $result['faultstring']);
+        try {
+//            $item = $request->except('_token','_method');
+            $item['id'] = $id;
+            $item['description'] = "Item API working.";
+            $item = array_filter($item);
+//            return $item;
+            $result = $this->client->call("updateItem", array('arg0' => $item));
+            if (isset($result) && !isset($result['faultstring'])) {
+                return redirect()->route('product.index')->with("msg", "record updated successfully.");
+            } else {
+                if(isset($result['faultstring'])){
+                    return redirect()->route('product.index')->withError($result['faultstring']);
+                }
+            }
+        } catch (Exception $e) {
+            return redirect()->route('product.index')->withError($e->getMessage());
         }
     }
 
 
     public function destroy($id)
     {
-        $result = $this->client->call("deleteItemCategory", array('arg0' => (int)$id));
+        try {
+            $result = $this->client->call("deleteItem", array('arg0' => (int)$id));
 
-        if (isset($result) && !isset($result['faultstring'])) {
-            return redirect()->route('product.index')->with("msg", "record deleted successfully.");
-        } else {
-            return redirect()->route('product.index')->with("errorMsg", $result['faultstring']);
+            if (isset($result) && !isset($result['faultstring'])) {
+                return redirect()->route('product.index')->withSuccess("record deleted successfully.");
+            } else {
+                return redirect()->route('product.index')->withError($result['faultstring']);
+            }
+        } catch (Exception $e) {
+            return redirect()->route('product.index')->withError($e->getMessage());
         }
-
 
     }
 }

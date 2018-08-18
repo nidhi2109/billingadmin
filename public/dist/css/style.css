@@ -3249,12 +3249,14 @@ a#toggle_mobile_nav {
   .heading-bg h5 {
     padding-top: 6px; }
 
+
 .breadcrumb {
-  background-color: transparent;
+  background-color:#f5f5f5;
+  border-radius:4px;
   float: right;
   list-style: outside none none;
   margin-bottom: 0;
-  padding: 9px 0 0 0;
+  padding:8px 15px;
   font-size: 13px; }
   .breadcrumb a, .breadcrumb span {
     text-transform: capitalize; }

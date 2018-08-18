@@ -28,7 +28,7 @@ Route::get('logout','LoginController@logoutuser')->name('logout');
 ADMIN ROUTES
 */
 Route::group(['prefix' => 'admin','middleware' => ['LoginAuth']], function () {
-	Route::get('dashboard','Admin\DashboardController@index')->name('admindashboard');
+	Route::get('dashboard','Admin\DashboardController@index')->name('adminDashboard');
     Route::resource('category','Admin\CategoryController');
     Route::get('downloadCSV','Admin\CategoryController@downloadCSV')->name('category.downloadCSV');
     Route::resource('product','Admin\ProductController');

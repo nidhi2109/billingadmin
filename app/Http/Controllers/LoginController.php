@@ -27,31 +27,19 @@ class LoginController extends Controller {
 		                         <div class="clearfix"></div>
 		                      </div>');
 
-		    return redirect()->route('login');
+		    return redirect()->route('login')->withError("Opps! ".$error);
 		}
 
 
         $result = $client->call("getUserId", array("arg0" => $name));
 //		return $result;
         if ($client->fault) {
-            \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                 <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">Invalid Username</p>
-                                 <div class="clearfix"></div>
-                              </div>');
-
-            return redirect()->route('login'); 
+            return redirect()->route('login')->withError("Opps! Invalid Username.");
         }
         else {
             $error = $client->getError();
             if ($error) {
-                \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                 <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">'.$error.'.</p>
-                                 <div class="clearfix"></div>
-                              </div>');
-
-               return redirect()->route('login');
+               return redirect()->route('login')->withError("Opps! ".$error);
             }
             else {
               //if name valid then check password
@@ -60,85 +48,35 @@ class LoginController extends Controller {
               $userid=$result['return'];
               $result = $client->call("getUserWS", array("arg0" => $userid));
               if ($client->fault) {
-                  \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-                                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                       <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">'.$client->fault.'.</p>
-                                       <div class="clearfix"></div>
-                                    </div>');
-
-                  return redirect()->route('login');          
-              }else{
-                  $actualpassword=$result['return']['password'];
+                  return redirect()->route('login')->withError($client->fault);
+              }else {
+                  $actualpassword = $result['return']['password'];
 
 //                  return $result;
-                //if($actualpassword==md5($password)){
-                  //set session n redirect
-                  $role=$result['return']['role'];
-                  $request->session()->put('name', $name);
-                  $request->session()->put('userid', $userid);
-                  $request->session()->put('role', $role);
-                  if($role=="Customer"){
-                    return redirect()->route('consumerDashboard');
-                  }else if($role=="Agent") {
-                    return redirect()->route('agentdashboard');
-                  }else if($role=="Super user") {
-                    return redirect()->route('admindashboard');
+                  if ($actualpassword == md5($password) || $actualpassword == md5(md5($password))) {
+                      //set session n redirect
+                      $role = $result['return']['role'];
+                      $request->session()->put('name', $name);
+                      $request->session()->put('userid', $userid);
+                      $request->session()->put('role', $role);
+                      if ($role == "Customer") {
+                          return redirect()->route('consumerDashboard')->withInfo("Welcome to Abill Dashboard.");
+                      } else if ($role == "Agent") {
+                          return redirect()->route('agentdashboard')->withInfo("Welcome to Abill Dashboard.");
+                      } else if ($role == "Super user") {
+                          return redirect()->route('adminDashboard')->withInfo("Welcome to Abill Dashboard.");
+                      }
+                      exit;
                   }
-                // }else{
-                //   \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-                //                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                //                  <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">Opps! Invalid Username or Password.</p>
-                //                  <div class="clearfix"></div>
-                //               </div>');
-
-                //   return redirect()->route('login');
-                // }
-                exit;
               }
                 
             }
         }   
-        // $result = $client->call("getUserWS", array("arg0" => 10845));
-        // if ($client->fault) {
-        //     \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-        //                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        //                          <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">'.$client->fault.'.</p>
-        //                          <div class="clearfix"></div>
-        //                       </div>');
 
-        //     return redirect()->route('login');          
-        // }
-        // else {
-        //     $error = $client->getError();
-        //     if ($error) {
-        //         \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-        //                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        //                          <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">'.$error.'.</p>
-        //                          <div class="clearfix"></div>
-        //                       </div>');
-
-        //        return redirect()->route('login');
-        //     }
-        //     else {
-        //        $role=$result['return']['mainRoleId'];
-        //        $request->session()->put('role', 4);
-        //        $request->session()->put('name', 'hiral');
-        //        return redirect()->route('consumerdashboard');
-        //        //based on role redirect to thier dashboard [pending]
-
-        //     }
-        // }
-
-        \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                 <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">Opps! Invalid Username or Password.</p>
-                                 <div class="clearfix"></div>
-                              </div>');
-
-        return redirect()->route('login');
+        return redirect()->route('login')->withError("Opps! Invalid Username or Password.");
    }
-    public function logoutuser(Request $request){
+    public function logoutUser(Request $request){
       $request->session()->flush();
-      return redirect()->route('login');
+      return redirect()->route('login')->withSuccess("Logout Successfully.");
     }
 }

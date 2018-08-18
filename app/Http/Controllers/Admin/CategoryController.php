@@ -23,23 +23,16 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         try {
-
             $result = $this->client->call("getAllItemCategories");
             $categories = $result['return'];
 
             if (isset($result['faultstring'])) {
-                \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
-                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                               <i class="zmdi zmdi-block pr-15 pull-left"></i><p class="pull-left">' . $result['faultstring'] . '.</p>
-                               <div class="clearfix"></div>
-                            </div>');
-
-                return redirect()->route('admindashboard');
+                return redirect()->route('adminDashboard')->withError($result['faultstring']);
             }
 
             return view('admin.category.view', ['categories' => Utility::customPagination($categories, $request->url())]);
         } catch (Exception $e) {
-            return redirect()->route('admindashboard')->with("errorMsg", $e->getMessage());
+            return redirect()->route('admindashboard')->withError($e->getMessage());
         }
 
     }
@@ -55,7 +48,7 @@ class CategoryController extends Controller
         $item = $request->except('_token');
         $result = $this->client->call("createItemCategory", array('arg0' => $item));
         if (isset($result) && !isset($result['faultstring'])) {
-            return redirect()->route('category.index')->with("msg", "record inserted successfully.");
+            return redirect()->route('category.index')->withSuccess("msg", "Record inserted successfully.");
 
         } else {
             return redirect()->route('category.index')->with("errorMsg", $result['faultstring']);
@@ -85,15 +78,15 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        $item = $request->except('_token');
+        $item = $request->except('_token','_method');
         $item['id'] = $id;
         $result = $this->client->call("updateItemCategory", array('arg0' => $item));
 
         if (isset($result) && !isset($result['faultstring'])) {
-            return redirect()->route('category.index')->with("msg", "record updated successfully.");
+            return redirect()->route('category.index')->withSuccess("Record updated successfully.");
 
         } else {
-            return redirect()->route('category.index')->with("errorMsg", $result['faultstring']);
+            return redirect()->route('category.index')->withError($result['faultstring']);
         }
     }
 
@@ -104,9 +97,9 @@ class CategoryController extends Controller
         $result = $this->client->call("deleteItemCategory", array('arg0' => (int)$id));
 
         if (isset($result) && !isset($result['faultstring'])) {
-            return redirect()->route('category.index')->with("msg", "record deleted successfully.");
+            return redirect()->route('category.index')->withSuccess("msg", "Record deleted successfully.");
         } else {
-            return redirect()->route('category.index')->with("errorMsg", $result['faultstring']);
+            return redirect()->route('category.index')->withError("errorMsg", $result['faultstring']);
         }
 
 
