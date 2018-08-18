@@ -48,7 +48,7 @@
                                     </thead>
                                     <tbody>
                                     @forelse($products as $product)
-                                        @if(!$product['deleted'])
+                                        {{--@if(!$product['deleted'])--}}
                                                 <tr>
                                                     <td>{{ $product['id'] }}</td>
                                                     <td>{{ $product['number'] }}</td>
@@ -70,7 +70,7 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                        @endif
+                                        {{--@endif--}}
                                     @empty
                                         <tr>
                                             <td colspan="4"> Record not found.</td>
@@ -78,6 +78,9 @@
                                     @endforelse
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="pull-right">
+                                {{ $products->links() }}
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class NotficationController extends Controller {
+class NotificationController extends Controller {
 
 	public function index(Request $request){
 		return view('consumer.notification');

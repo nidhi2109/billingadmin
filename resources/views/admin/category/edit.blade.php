@@ -50,9 +50,9 @@
                                                     <div class="input-group">
                                                         <div class="input-group-addon"><i class="icon-user"></i></div>
                                                         <select name="orderLineTypeId" class="form-control" id="orderLineTypeId">
-                                                            <option value="1" @if(isset($category['orderLineTypeId']) == 1)selected @endif>Items</option>
-                                                            <option value="2" @if(isset($category['orderLineTypeId']) == 2)selected @endif>Tax</option>
-                                                            <option value="3" @if(isset($category['orderLineTypeId']) == 3)selected @endif>Penalty</option>
+                                                            <option value="1" @if($category['orderLineTypeId'] == 1)selected @endif>Items</option>
+                                                            <option value="2" @if($category['orderLineTypeId'] == 2)selected @endif>Tax</option>
+                                                            <option value="3" @if($category['orderLineTypeId'] == 3)selected @endif>Penalty</option>
                                                         </select>
                                                     </div>
                                                 </div>

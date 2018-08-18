@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin','middleware' => ['LoginAuth']], function () {
 AGENT ROUTES
 */
 Route::group(['prefix' => 'agent','middleware' => ['LoginAuth']], function (){
+
 	Route::get('dashboard','Agent\DashboardController@index')->name('agentdashboard');
 	Route::get('location','Agent\LocationController@index')->name('agentlocation');
 	Route::get('account','Agent\AccountController@index')->name('agentaccount');
@@ -58,13 +59,17 @@ Route::group(['prefix' => 'agent','middleware' => ['LoginAuth']], function (){
 /*
 CONSUMER ROUTES
 */
-Route::group(['prefix' => 'consumer','middleware' => ['LoginAuth']], function () {
-	Route::get('dashboard','Consumer\DashboardController@index')->name('consumerdashboard');
-	Route::get('account','Consumer\AccountController@index')->name('consumeraccount');
-	Route::get('billing','Consumer\BillingController@index')->name('consumerbilling');
-	Route::get('device','Consumer\DeviceController@index')->name('consumerdevice');
-	Route::get('notification','Consumer\NotificationController@index')->name('consumernotification');
-	Route::get('registeration','Consumer\AccountController@index')->name('consumerregisteration');
-	Route::post('registeration/savedata','Consumer\AccountController@savedata')->name('consumersavedata');
+Route::group(['prefix' => 'consumer'], function () {
+    Route::get('registration','Consumer\AccountController@index')->name('consumeRegistration');
+    Route::post('registration/savedata','Consumer\AccountController@savedata')->name('consumersavedata');
+
+    Route::group(['middleware' => 'LoginAuth'], function() {
+        Route::get('dashboard', 'Consumer\DashboardController@index')->name('consumerdashboard');
+        Route::get('account', 'Consumer\AccountController@index')->name('consumeraccount');
+        Route::get('billing', 'Consumer\BillingController@index')->name('consumerbilling');
+        Route::get('device', 'Consumer\DeviceController@index')->name('consumerdevice');
+        Route::get('notification', 'Consumer\NotificationController@index')->name('consumernotification');
+    });
+
 });
 

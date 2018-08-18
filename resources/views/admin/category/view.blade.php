@@ -78,14 +78,12 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <form method="post"
-                                                      action="{{ route('category.destroy',$category['id']) }}">
+                                                <form method="post" action="{{ route('category.destroy',$category['id']) }}">
                                                     @csrf
                                                     @method('delete')
                                                     <a href="{{ route('category.edit',$category['id']) }}"
-                                                       class="btn  btn-primary"> <i class="fa fa-pencil"></i> </a>
-                                                    <button type="submit" class="btn btn-danger"><i
-                                                                class="fa fa-trash "></i></button>
+                                                       class="btn  btn-primary"><i class="fa fa-pencil"></i></a>
+                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -96,6 +94,9 @@
                                     @endforelse
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="pull-right">
+                                {{ $categories->links() }}
                             </div>
                         </div>
                     </div>
