@@ -60,15 +60,15 @@ Route::group(['prefix' => 'agent','middleware' => ['LoginAuth']], function (){
 CONSUMER ROUTES
 */
 Route::group(['prefix' => 'consumer'], function () {
-    Route::get('registration','Consumer\AccountController@index')->name('consumeRegistration');
-    Route::post('registration/savedata','Consumer\AccountController@savedata')->name('consumersavedata');
+    Route::get('registration','Consumer\AccountController@regform')->name('consumeRegistration');
+    Route::post('consumerSaveData','Consumer\AccountController@savedata')->name('consumerSaveData');
 
     Route::group(['middleware' => 'LoginAuth'], function() {
-        Route::get('dashboard', 'Consumer\DashboardController@index')->name('consumerdashboard');
-        Route::get('account', 'Consumer\AccountController@index')->name('consumeraccount');
-        Route::get('billing', 'Consumer\BillingController@index')->name('consumerbilling');
-        Route::get('device', 'Consumer\DeviceController@index')->name('consumerdevice');
-        Route::get('notification', 'Consumer\NotificationController@index')->name('consumernotification');
+        Route::get('dashboard', 'Consumer\DashboardController@index')->name('consumerDashboard');
+        Route::get('account', 'Consumer\AccountController@index')->name('consumerAccount');
+        Route::get('billing', 'Consumer\BillingController@index')->name('consumerBilling');
+        Route::get('device', 'Consumer\DeviceController@index')->name('consumerDevice');
+        Route::get('notification', 'Consumer\NotificationController@index')->name('consumerNotification');
     });
 
 });

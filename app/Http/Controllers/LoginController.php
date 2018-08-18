@@ -78,7 +78,7 @@ class LoginController extends Controller {
                   $request->session()->put('userid', $userid);
                   $request->session()->put('role', $role);
                   if($role=="Customer"){
-                    return redirect()->route('consumerdashboard');
+                    return redirect()->route('consumerDashboard');
                   }else if($role=="Agent") {
                     return redirect()->route('agentdashboard');
                   }else if($role=="Super user") {

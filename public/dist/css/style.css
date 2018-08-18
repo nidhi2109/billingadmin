@@ -2903,6 +2903,7 @@ a#toggle_mobile_nav {
           margin-right: 10px;
           position: relative;
           height: 29px;
+          margin-bottom: 7px;
         }
         .navbar.navbar-inverse.navbar-fixed-top .nav-header .logo-wrap .brand-text {
           display: inline-block;
@@ -6951,7 +6952,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
   padding-left: 15px; }
   .sp-logo-wrap .brand-img {
     position: relative;
-    top: 2px;
+    top: 5px;
     height: 26px;
   }
   .sp-logo-wrap .brand-text {

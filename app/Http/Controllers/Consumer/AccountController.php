@@ -9,10 +9,9 @@ use App\Http\Controllers\Controller;
 class AccountController extends Controller {
 
     public function index(Request $request){
-        $userid=$request->session()->get('userid');
+        $userid = $request->session()->get('userid');
         $client = new \nusoap_client("http://67.205.185.159:8080/abill/services/apiTwo?wsdl", "true");
         $client->setCredentials("billingadmin;20","123qwe","basic");
-
         $result = $client->call("getUserWS", array("arg0" => $userid));
         if ($client->fault) {
             \Session::flash('message', '<div class="alert alert-danger alert-dismissable">
@@ -21,16 +20,17 @@ class AccountController extends Controller {
                                <div class="clearfix"></div>
                             </div>');
 
-            return redirect()->route('consumerdashboard');
+            return redirect()->route('consumerDashboard');
         }else{
 
             return view('consumer.account')->with('account', $result);
         }
     }
+
     public function regform(){
-        return view('consumer.registeration');
+        return view('consumer.registration');
     }
-    public function savedata(Request $request){
+    public function saveData(Request $request){
         $client = new \nusoap_client("http://67.205.185.159:8080/abill/services/apiTwo?wsdl", "true");
         $client->setCredentials("billingadmin;20","123qwe","basic");
 
@@ -42,7 +42,7 @@ class AccountController extends Controller {
                                  <div class="clearfix"></div>
                               </div>');
 
-            return redirect()->route('consumerregisteration');
+            return redirect()->route('consumeRegistration');
         }
 
         $username = $request->input('loginname');
@@ -144,7 +144,7 @@ class AccountController extends Controller {
                        <div class="clearfix"></div>
                     </div>');
 
-            return redirect()->route('consumerdashboard');
+            return redirect()->route('consumerDashboard');
         }else{
 
             return view('consumer.editaccount')->with(array('account'=>$result,'id'=>$userid));
@@ -163,7 +163,7 @@ class AccountController extends Controller {
                                  <div class="clearfix"></div>
                               </div>');
 
-            return redirect()->route('consumerregisteration');
+            return redirect()->route('consumerRegistration');
         }
 
         $username = $request->input('loginname');
@@ -302,7 +302,7 @@ class AccountController extends Controller {
                                  <div class="clearfix"></div>
                               </div>');
 
-            return redirect()->route('consumerregisteration');
+            return redirect()->route('consumerRegistration');
         }
         else {
             \Session::flash('message', '<div class="alert alert-success alert-dismissable">
@@ -311,7 +311,7 @@ class AccountController extends Controller {
                                  <div class="clearfix"></div>
                               </div>');
 
-            return redirect()->route('consumeraccount', ['id' => $userid]);
+            return redirect()->route('consumerAccount', ['id' => $userid]);
         }
     }
 }

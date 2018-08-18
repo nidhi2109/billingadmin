@@ -38,7 +38,7 @@
 	<header class="sp-header">
 		<div class="sp-logo-wrap pull-left">
 			<a href="">
-				<img class="brand-img" src="{{ asset('public/img/abilllogo.gif') }}" alt="brand" width="30px" height="30px"/>
+				<img class="brand-img" src="{{ asset('public/img/logo.gif') }}" alt="brand"/>
 				<span class="brand-text">aBill</span>
 			</a>
 		</div>
@@ -65,7 +65,7 @@
 									<h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
 								</div>
 								<div class="form-wrap">
-									<form id="msform" action="{{ URL::to('consumer/registration/savedata') }}" method="post" novalidate data-toggle="validator" role="form">
+									<form id="msform" action="{{ route('consumerSaveData') }}" method="post" novalidate data-toggle="validator" role="form">
 									{{ csrf_field() }}
 									<!-- progressbar -->
 										<ul id="progressbar">
