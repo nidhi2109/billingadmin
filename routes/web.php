@@ -29,17 +29,36 @@ ADMIN ROUTES
 */
 Route::group(['prefix' => 'admin','middleware' => ['LoginAuth']], function () {
 	Route::get('dashboard','Admin\DashboardController@index')->name('adminDashboard');
-    Route::resource('category','Admin\CategoryController');
-    Route::get('downloadCSV','Admin\CategoryController@downloadCSV')->name('category.downloadCSV');
-    Route::resource('product','Admin\ProductController');
     Route::get('account','Admin\AccountController@index')->name('adminAccount');
+	//category
+    Route::resource('category','Admin\CategoryController');
+    Route::get('category.downloadCSV','Admin\CategoryController@downloadCSV')->name('category.downloadCSV');
+
+    //product
+    Route::resource('product','Admin\ProductController');
+    Route::get('product.downloadCSV','Admin\ProductController@downloadCSV')->name('product.downloadCSV');
+
+    //invoice
+    Route::resource('invoice','Admin\InvoiceController');
+    Route::get('invoice.downloadCSV','Admin\ProductController@downloadCSV')->name('invoice.downloadCSV');
+
+
     Route::post('accountUpdate','Admin\AccountController@updateData')->name('accountUpdate');
 	Route::get('agent','Admin\AgentController@index')->name('adminagent');
 	Route::get('role','Admin\RoleController@index')->name('adminrole');
 //	Route::get('product','Admin\ProductController@index')->name('adminproduct');
-	Route::get('order','Admin\OrderController@index')->name('adminorder');
+
+    //order
+    Route::get('order','Admin\OrderController@index')->name('adminorder');
+    Route::get('order/view/{id}','Admin\OrderController@view')->name('order.view');
+    Route::get('order/applyinvoice/{id}','Admin\OrderController@applyinvoice')->name('order.applyinvoice');
+    Route::get('order/generateinvoice/{id}','Admin\OrderController@generateinvoice')->name('order.generateinvoice');
+    Route::get('order/downloadCSV','Admin\OrderController@downloadCSV')->name('order.downloadCSV');
+    Route::get('order/create','Admin\OrderController@create')->name('order.create');
+    Route::get('order/create/createorder/{id}','Admin\OrderController@createorder')->name('order.create.createorder');
+
 	Route::get('payment','Admin\PaymentController@index')->name('adminpayment');
-	Route::get('invoice','Admin\InvoiceController@index')->name('admininvoice');
+
 	Route::get('report','Admin\ReportController@index')->name('adminreport');
 });
 

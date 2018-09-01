@@ -5,7 +5,7 @@
             <div class="logo-wrap">
                 <a href="{{ URL::to('login') }}">
                     <img class="brand-img" src="{{ asset('public/img/logo.gif') }}" alt="brand"/>
-                    <span class="brand-text">aBill</span>
+                    <span class="brand-text" style="vertical-align:top !important;">aBill</span>
                 </a>
             </div>
         </div>

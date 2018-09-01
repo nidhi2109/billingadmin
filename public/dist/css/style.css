@@ -3263,7 +3263,7 @@ a#toggle_mobile_nav {
   .breadcrumb a {
     color: #212121;
     opacity: .5;
-    -webkit-transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;vertical-align
     -moz-transition: 0.3s ease;
     transition: 0.3s ease; }
     .breadcrumb a:hover {
@@ -6986,7 +6986,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
   line-height: 112px; }
 
 .error-bg-img {
-  background: url("../../../img/errorbg.jpg");
+  background: url("./public/img/errorbg.jpg");
   background-size: cover; }
 
 /*Products*/

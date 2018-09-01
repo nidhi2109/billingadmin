@@ -28,7 +28,7 @@
                     <div class="col-md-6 text-right">
                         <a class="btn btn-primary btn-sm" href="{{ route("product.create") }}">Add New Product</a>
                         <a class="btn btn-info btn-sm" href="{{ route("category.create") }}">Add New Category</a>
-                        <a href="{{ route("category.downloadCSV") }}" class="btn btn-default btn-anim btn-sm"><i class="fa fa-download"></i><span class="btn-text">Download CSV</span></a>
+                        <a href="{{ route("product.downloadCSV") }}" class="btn btn-default btn-anim btn-sm"><i class="fa fa-download"></i><span class="btn-text">Download CSV</span></a>
                     </div>
 
                     <div class="clearfix"></div>

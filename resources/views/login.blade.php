@@ -45,7 +45,7 @@
             <div class="row no-gutter">
                 <div class="col-md-10 col-md-offset-1">
                     <img src="{{ asset('public/images/login-logo.png') }}" class="login-logo" alt="" />
-                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator" role="form" id="formValidate">
+                    <form method="POST" action="{{ URL::to('checklogin') }}" data-toggle="validator" role="form" id="formValidate" autocomplete="off">
                         @include('layouts.notifications')
                     @csrf
                         <ul class="list-unstyled form-style">
@@ -54,7 +54,7 @@
                                 <i class="zmdi zmdi-account user-pass"></i>
                                 <div class="form-group " id="eusername">
 
-                                    <input id="username" type="text" class="form-control login-form-control" name="username" value=""  autofocus placeholder="Enter Username">
+                                    <input id="username" type="text" class="form-control login-form-control" name="username" value=""  autofocus placeholder="Enter Username" autocomplete="off">
 
                                     <span id="errusername" ></span>
                                 </div>
@@ -65,7 +65,7 @@
                                 <div class="form-group " id="epassword">
 
 
-                                    <input id="password" type="password" class="form-control login-form-control" name="password"  placeholder="Enter Password">
+                                    <input id="password" type="password" class="form-control login-form-control" name="password"  placeholder="Enter Password" autocomplete="off">
 
                                     <span id="errpassword"></span>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Exception;
+use Response;
 
 class ProductController extends Controller
 {
@@ -101,7 +102,7 @@ class ProductController extends Controller
 //            return $item;
             $result = $this->client->call("updateItem", array('arg0' => $item));
             if (isset($result) && !isset($result['faultstring'])) {
-                return redirect()->route('product.index')->with("msg", "record updated successfully.");
+                return redirect()->route('product.index')->withSuccess("record updated successfully.");
             } else {
                 if(isset($result['faultstring'])){
                     return redirect()->route('product.index')->withError($result['faultstring']);
@@ -127,5 +128,37 @@ class ProductController extends Controller
             return redirect()->route('product.index')->withError($e->getMessage());
         }
 
+    }
+
+    public function downloadCSV()
+    {
+        try {
+            $result = $this->client->call("getAllItems");
+            $products = $result['return'];
+//        return $products;
+
+            $filename = "category.csv";
+            $handle = fopen($filename, 'w+');
+            fputcsv($handle, array('id', 'productCode', 'itemTypes','hasDecimals','priceManual','percentage','prices'));
+
+            foreach ($products as $row) {
+
+                if(is_array($row['types'])){
+                    $row['types'] = implode(",",$row['types']);
+                }else{
+                    $row['types'] = $row['types'];
+                }
+                fputcsv($handle, array($row['id'], $row['number'],$row['types'] , $row['hasDecimals'], $row['priceManual'], isset($row['percentage']) ? $row['percentage'] :"",isset($row['price']) ? $row['price'] : ""));
+            }
+
+            fclose($handle);
+
+            $headers = array(
+                'Content-Type' => 'text/csv',
+            );
+            return Response::download($filename, 'product.csv', $headers);
+        }catch (Exception $e){
+            return redirect()->route('product.index')->withError($e->getMessage());
+        }
     }
 }

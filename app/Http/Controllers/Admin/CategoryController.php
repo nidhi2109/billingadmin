@@ -51,7 +51,7 @@ class CategoryController extends Controller
             return redirect()->route('category.index')->withSuccess("msg", "Record inserted successfully.");
 
         } else {
-            return redirect()->route('category.index')->with("errorMsg", $result['faultstring']);
+            return redirect()->route('category.index')->withError($result['faultstring']);
         }
     }
 
@@ -97,9 +97,9 @@ class CategoryController extends Controller
         $result = $this->client->call("deleteItemCategory", array('arg0' => (int)$id));
 
         if (isset($result) && !isset($result['faultstring'])) {
-            return redirect()->route('category.index')->withSuccess("msg", "Record deleted successfully.");
+            return redirect()->route('category.index')->withSuccess("Record deleted successfully.");
         } else {
-            return redirect()->route('category.index')->withError("errorMsg", $result['faultstring']);
+            return redirect()->route('category.index')->withError($result['faultstring']);
         }
 
 
